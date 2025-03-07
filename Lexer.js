@@ -4,9 +4,7 @@ export const tokenTypes = {
   MULTIPLY: "MULTIPLY",
   DIVIDE: "DIVIDE",
   INTEGER: "INTEGER",
-  LEFT_BRACKET: "LEFT_BRACKET",
-  RIGHT_BRACKET: "RIGHT_BRACKET",
-  EOF: "EOF",
+  EOL: "EOL",
 };
 
 export default class Lexer {
@@ -42,12 +40,6 @@ export default class Lexer {
         case "/":
           tokens.push({ type: tokenTypes.DIVIDE, value: "/" });
           break;
-        case "(":
-          tokens.push({ type: tokenTypes.LEFT_BRACKET, value: "(" });
-          break;
-        case ")":
-          tokens.push({ type: tokenTypes.RIGHT_BRACKET, value: ")" });
-          break;
         default:
           if (isNumeric(this.#at())) {
             let strNumber = "";
@@ -77,7 +69,7 @@ export default class Lexer {
       this.#cursor++;
     }
 
-    tokens.push({ type: tokenTypes.EOF, value: "EOF" });
+    tokens.push({ type: tokenTypes.EOL, value: "EOL" });
     return tokens;
     /*
 
